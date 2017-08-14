@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Bank_System" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local);Initial Catalog=Bank_System;Integrated Security=True" SettingsObjectName="Bank_System.Properties.Settings" SettingsPropertyName="Bank_SystemConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.admin" Member="admins">
+    <Type Name="admin">
+      <Column Name="username" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.branch" Member="branches">
+    <Type Name="branch">
+      <Column Name="BranchID" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Association Name="branch_account" Member="accounts" ThisKey="BranchID" OtherKey="BranchID" Type="account" />
+    </Type>
+  </Table>
+  <Table Name="dbo.customer" Member="customers">
+    <Type Name="customer">
+      <Column Name="CustomerID" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="NIC" Type="System.String" DbType="VarChar(14)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="Age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(80)" CanBeNull="true" />
+      <Column Name="Income" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="customer_account" Member="accounts" ThisKey="CustomerID" OtherKey="CustomerID" Type="account" />
+    </Type>
+  </Table>
+  <Table Name="dbo.intrest" Member="intrests">
+    <Type Name="intrest">
+      <Column Name="Type" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Rate" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.account" Member="accounts">
+    <Type Name="account">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AccountNumber" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="AccountType" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="IntrestRate" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="DateAccountOpen" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="AccountBalance" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="BranchID" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CustomerID" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="branch_account" Member="branch" ThisKey="BranchID" OtherKey="BranchID" Type="branch" IsForeignKey="true" />
+      <Association Name="customer_account" Member="customer" ThisKey="CustomerID" OtherKey="CustomerID" Type="customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
